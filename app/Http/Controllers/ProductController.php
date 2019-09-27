@@ -28,8 +28,7 @@ class ProductController extends Controller
         
 
         DB::insert('insert into products (name, image, price, created_at, description) values (?, ?, ?, ?, ?)', [$product_name, $image, $price, $create_at, $description]);
-        $products = DB::table('products')->get();
-        return view('admin/products/product_list', ['products'=>$products]);
+        return redirect('products/list_product');
     }
 
     public function get_Edit($id){
@@ -54,8 +53,7 @@ class ProductController extends Controller
         }
 
         DB::update('update products set name = ?, image = ?, price = ?, updated_at = ?, description = ? where id = ?', [$product_name, $image, $price, $updated_at, $description, $id]);
-        $products = DB::table('products')->get();
-        return view('admin/products/product_list', ['products'=>$products]);
+        return redirect('products/list_product');
     }
 
     public function List_Product(){
@@ -65,7 +63,6 @@ class ProductController extends Controller
 
     public function Delete_Product($id){
         DB::delete('delete from products where id = ?', [$id]);
-        $products = DB::table('products')->get();
-        return view('admin/products/product_list', ['products'=>$products]);
+        return redirect('products/list_product');
     }
 }
